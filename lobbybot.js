@@ -26,14 +26,13 @@ require("firebase/firestore");
 
 var chatBotOptions = {
 	disableWebServer: true,
-	//	sentryFile: ,		//Bot tries to find a sentry file automatically. This is only required if you have one with a strange name, otherwise it's automatic.
-	logFile: true,//set to true to log to bot.$username.log, or define a custom logfile. Set to false if you don't want to log to file.
-	autoconnect: true,
-	autoReconnect: true,//automatically reconnect to the server
+	logFile: true,		//set to true to log to bot.$username.log, or define a custom logfile. Set to false if you don't want to log to file.
+	autoConnect: true,
+	autoReconnect: true, //automatically reconnect to the server
 	consoleTime: false, //don't put timestamps in the console log, `heroku logs` shows them anyways
 	consoleColors: false, //don't use colors in the log. using `heroku logs` will be annoying.
 	consoleLogLevel: "info", //don't log chatter to console, it's spammy. Only log warnings, errors, etc.
-	steamapiKey = ""
+	steamapiKey : ""
 };
 
 if(process.env.guardCode) {
@@ -45,7 +44,7 @@ var password = process.env.password || "";
 var fusername = process.env.fusername || "";
 var fpassword = process.env.fpassword || "";
 
-var defaultTriggers = require("./triggers");
+var defaultTriggers = require("./triggers.js");
 
 prepareFirebase()
 	.then(initBot)
@@ -69,6 +68,7 @@ function prepareFirebase() {
 		console.log("Initializing Firebase");
 		// Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
+		console.log("Attempting to authorize connection");
 		firebase.auth().signInWithEmailAndPassword(fusername, fpassword)
 		.then((userCredential) => {
 			var user = userCredential.user;
@@ -84,6 +84,7 @@ function prepareFirebase() {
 function initBot() {
 	console.log("Initializing bot");
 	var myBot = new ChatBot(username, password, chatBotOptions);
+	console.log("Adding triggers");
 	myBot.addTriggers(defaultTriggers);
 	console.log("Connecting");
 	myBot.connect();

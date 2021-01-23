@@ -22,6 +22,16 @@ module.exports = [
 			callback: ["unmute"] // calls ChatBot.unmute()
 		} 
 	},
+	{ 
+		name: 'RestartCommand', 
+		type: 'BotCommandTrigger', 
+		options: { 
+			matches: ['!restart', '!r', '!reload'], 
+			exact: true,
+			users: [adminUser],
+			callback: "restart" // calls ChatBot.restart()
+		} 
+	},
 
 	{ name: 'SayTrigger',          type: 'SayTrigger',          options: { users: [adminUser] } },
 	{ name: 'ModerateTrigger',     type: 'ModerateTrigger',     options: { users: [adminUser] } },
@@ -40,6 +50,7 @@ module.exports = [
 	
 	{ name: 'LobbyTrigger', 	type: 'LobbyTrigger', options: {
 		matches: ['!queue', '!q'], 
+		rmatches: ['!unqueue', '!removequeue', '!uq'],
 		timeout: 1000
 	} },
 
@@ -47,18 +58,6 @@ module.exports = [
 	{ name: 'HelpCmd',   type: 'ChatReplyTrigger', options: {
 		matches: ['!help','!triggers','!cmds','!commands'],
 		responses: ['Please view my profile for a list of publicly commands and other triggers. Not all triggers are allowed in all chats.'],
-		exact: true, probability: 1, timeout: 1000 } },
-	{ name: 'BugsCmd',   type: 'ChatReplyTrigger', options: {
-		matches: ['!bug','!bugs','!issue','!feature'],
-		responses: ['You can submit bugs and feature requests at http://github.com/Efreak/node-steam-chat-bot/issues'],
-		exact: true, probability: 1, timeout: 1000 } },
-	{ name: 'OwnerCmd',  type: 'ChatReplyTrigger', options: {
-		matches: ['!owner','!efreak'],
-		responses: ['My owner is http://steamcommunity.com/profiles/76561198008335925/'],
-		exact: true, probability: 1, timeout: 1000 } },
-	{ name: 'SourceCmd', type: 'ChatReplyTrigger', options: {
-		matches: ['!source','!about'],
-		responses: ['This bot is based on node-steam-chat-bot, a wrapper around node-steam, which is a nodejs port of SteamKit2. You can find full source code and some documentation and examples at http://github.com/Efreak/node-steam-chat-bot'],
 		exact: true, probability: 1, timeout: 1000 } },
 
 	// Automatically accept invites from any user to the specified group chat. I have reports that this may not currently work.
