@@ -49,21 +49,23 @@ module.exports = [
 	{ name: 'AddFriendTrigger',    type: 'AddFriendTrigger',    options: { users: [adminUser] } },
 	
 	{ name: 'LobbyTrigger', 	type: 'LobbyTrigger', options: {
-		matches: ['!queue', '!q'], 
-		rmatches: ['!unqueue', '!removequeue', '!uq'],
 		timeout: 1000
 	} },
 	
 	{ name: 'FaceitTrigger', 	type: 'FaceitTrigger', options: {
 		matches: ['!faceit', '!f'], 
-		users: [adminUser],
+		timeout: 1000
+	} },
+	
+	{ name: 'MeTrigger', 	type: 'MeTrigger', options: {
+		matches: ['!me'], 
 		timeout: 1000
 	} },
 
 	// Informational commands
 	{ name: 'HelpCmd',   type: 'ChatReplyTrigger', options: {
-		matches: ['!help','!triggers','!cmds','!commands'],
-		responses: ['Please view my profile for a list of publicly commands and other triggers. Not all triggers are allowed in all chats.'],
+		matches: ['!help', '!triggers', '!cmds', '!commands', '!h'],
+		responses: ['List of commands: \r\n!faceit - Shows your faceit stats.\r\n  !queue <time> - Adds you to the queue at your specified time. Defaults to 20:00.\r\n  !unqueue - Removes you from queue\r\n  !list - Shows all currently queued players.\r\n  !lobby - Shows my best solution to create lobbies.'],
 		exact: true, probability: 1, timeout: 1000 } },
 
 	// Automatically accept invites from any user to the specified group chat. I have reports that this may not currently work.

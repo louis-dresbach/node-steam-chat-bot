@@ -81,9 +81,9 @@ FaceitTrigger.prototype._respond = function(toId, message, fromId) {
 		firebase.app();
 		firebase.auth().signInWithEmailAndPassword(fusername, fpassword)
 		.then((userCredential) => {
-			var ref = firebase.database().ref('players/'+fromId).once("value")
+			var ref = firebase.database().ref('players/'+fromId).get()
 			.then((val) => {
-				if(typeof(val.val()) !== 'undefined' && val.val() != null && typeof(val.val().faceit) !== 'undefined') {
+				if(typeof(val.val().faceit) !== 'undefined') {
 					// Get Faceit info from database
 					api.players(val.val().faceit, "", "")
 					.then((d) => {
@@ -98,34 +98,24 @@ FaceitTrigger.prototype._respond = function(toId, message, fromId) {
 					this._sendMessageAfterDelay(dest, "I do not yet have your Faceit account in my database. ");
 					api.searchPlayer(fromId, 0, 1)
 					.then((data) => {
-						if(data.items.length == 1) {
-							// Store it in firebase
-							firebase.database().ref('players/' + fromId + "/faceit").set(
-								data.items[0].player_id
-							).then((result) => {
-								this._sendMessageAfterDelay(dest, "I added your account "+data.items[0].nickname+" to my database.");
-							})
-							.catch((error) => {
-								this._sendMessageAfterDelay(dest, "An error occured: " + error);
-								console.error(error);
-							});
-							api.players(data.items[0].player_id, "", "")
-							.then((d) => {
-								var message = "Your Faceit stats: \r\n"
-								+ "ELO: " + d.games.csgo.faceit_elo + " [Level " + d.games.csgo.skill_level + "] \r\n"
-								+ (d.faceit_url).replace("{lang}", "en");
-								this._sendMessageAfterDelay(dest, message);
-							}).catch((error) => {
-								console.error(error);
-								this._sendMessageAfterDelay(dest, "An error occured: " + error);
-							});
-						}
-						else {
-							this._sendMessageAfterDelay(dest, "I am having trouble finding your Faceit profile. Are you sure it exists?");
-						}
+						// Store it in firebase
+						firebase.database().ref('players/' + fromId).set({
+							faceit : data.items[0].player_id
+						}).then((result) => {
+							this._sendMessageAfterDelay(dest, "I added your account "+data.items[0].nickname+" to my database.");
+						})
+						.catch((error) => {
+							console.error(error);
+						});
+						api.players(data.items[0].player_id, "", "")
+						.then((d) => {
+							var message = "Your Faceit stats: \r\n"
+							+ "ELO: " + d.games.csgo.faceit_elo + " [Level " + d.games.csgo.skill_level + "] \r\n"
+							+ (d.faceit_url).replace("{lang}", "en");
+							this._sendMessageAfterDelay(dest, message);
+						});
 					}).catch((error) => {
 						console.error(error);
-						this._sendMessageAfterDelay(dest, "An error occured: " + error);
 					});
 				}
 			}).catch((error) => {
