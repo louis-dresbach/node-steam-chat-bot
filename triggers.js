@@ -53,6 +53,12 @@ module.exports = [
 		rmatches: ['!unqueue', '!removequeue', '!uq'],
 		timeout: 1000
 	} },
+	
+	{ name: 'FaceitTrigger', 	type: 'FaceitTrigger', options: {
+		matches: ['!faceit', '!f'], 
+		users: [adminUser],
+		timeout: 1000
+	} },
 
 	// Informational commands
 	{ name: 'HelpCmd',   type: 'ChatReplyTrigger', options: {
