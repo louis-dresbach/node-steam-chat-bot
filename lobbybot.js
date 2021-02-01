@@ -13,7 +13,7 @@
 require('dotenv').config({silent: true});
 
 var when = require("when");
-var ChatBot = require("steam-chat-bot").ChatBot;
+var ChatBot = require("nscb").ChatBot;
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
@@ -21,6 +21,7 @@ var firebase = require("firebase/app");
 
 // Add the Firebase products that you want to use
 require("firebase/auth");
+require("firebase/database");
 require("firebase/firestore");
 
 
