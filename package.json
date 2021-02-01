@@ -1,0 +1,66 @@
+{
+  "_from": "nscb@^1.0.0",
+  "_id": "nscb@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-QxBH6iEJfB/9g6GMY7bEu3dV38+OWuXY2Pz4WCG/OI7g6AdTs9WjckKhSVvEP+YQ+mKsD0SxU8ITPxCxCMHD1Q==",
+  "_location": "/nscb",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "nscb@^1.0.0",
+    "name": "nscb",
+    "escapedName": "nscb",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nscb/-/nscb-1.0.0.tgz",
+  "_shasum": "94a6128bd3d95bc020ef9bb1cba6e2c0e5c4f296",
+  "_spec": "nscb@^1.0.0",
+  "_where": "/home/steam",
+  "author": {
+    "name": "Louis Dresbach"
+  },
+  "bugs": {
+    "url": "https://github.com/louis-dresbach/nscb/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "faceit-js": "0.0.3",
+    "firebase": "^8.2.4",
+    "firebase-admin": "^9.4.2",
+    "locutus": "^2.0.14",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "steam-user": "^4.19.2",
+    "tinycache": "^1.1.2",
+    "ts3-nodejs-library": "^3.2.0",
+    "when": "^3.7.8",
+    "winston": "^3.3.3",
+    "xmljs": "^0.3.2"
+  },
+  "deprecated": false,
+  "description": "My Steambot",
+  "homepage": "https://github.com/louis-dresbach/nscb#readme",
+  "keywords": [
+    "bot"
+  ],
+  "license": "ISC",
+  "main": "lobbybot.js",
+  "name": "nscb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louis-dresbach/nscb.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

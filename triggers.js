@@ -10,6 +10,7 @@ module.exports = [
 		options: { 
 			matches: ['!mute','stfu bot','bot, stfu','shut up, bot','bot, shut up'], 
 			exact: true,
+			users: [adminUser],
 			callback: ["mute"] // calls ChatBot.mute()
 		} 
 	},
@@ -19,6 +20,7 @@ module.exports = [
 		options: { 
 			matches: ['!unmute', '!unpause','wake up, bot','bot, wake up','wake up bot','bot wake up'], 
 			exact: true,
+			users: [adminUser],
 			callback: ["unmute"] // calls ChatBot.unmute()
 		} 
 	},
@@ -29,41 +31,42 @@ module.exports = [
 			matches: ['!restart', '!r', '!reload'], 
 			exact: true,
 			users: [adminUser],
-			callback: "restart" // calls ChatBot.restart()
+			callback: ["restart"] // calls ChatBot.restart()
 		} 
 	},
 
-	{ name: 'SayTrigger',          type: 'SayTrigger',          options: { users: [adminUser] } },
-	{ name: 'ModerateTrigger',     type: 'ModerateTrigger',     options: { users: [adminUser] } },
-	{ name: 'BanTrigger',          type: 'BanTrigger',          options: { users: [adminUser] } },
-	{ name: 'KickTrigger',         type: 'KickTrigger',         options: { users: [adminUser] } },
-	{ name: 'UnbanTrigger',        type: 'UnbanTrigger',        options: { users: [adminUser] } },
-	{ name: 'UnmoderateTrigger',   type: 'UnmoderateTrigger',   options: { users: [adminUser] } },
-	{ name: 'UnlockChatTrigger',   type: 'UnlockChatTrigger',   options: { users: [adminUser] } },
-	{ name: 'LockChatTrigger',     type: 'LockChatTrigger',     options: { users: [adminUser] } },
 	{ name: 'LeaveChatTrigger',    type: 'LeaveChatTrigger',    options: { users: [adminUser] } },
 	{ name: 'SetStatusTrigger',    type: 'SetStatusTrigger',    options: { users: [adminUser] } },
 	{ name: 'SetNameTrigger',      type: 'SetNameTrigger',      options: { users: [adminUser] } },
-	{ name: 'JoinChatTrigger',     type: 'JoinChatTrigger',     options: { users: [adminUser] } },
 	{ name: 'RemoveFriendTrigger', type: 'RemoveFriendTrigger', options: { users: [adminUser] } },
 	{ name: 'AddFriendTrigger',    type: 'AddFriendTrigger',    options: { users: [adminUser] } },
 	
 	{ name: 'LobbyTrigger', 	type: 'LobbyTrigger', options: {
-		matches: ['!queue', '!q'], 
-		rmatches: ['!unqueue', '!removequeue', '!uq'],
 		timeout: 1000
 	} },
 	
 	{ name: 'FaceitTrigger', 	type: 'FaceitTrigger', options: {
 		matches: ['!faceit', '!f'], 
-		users: [adminUser],
+		timeout: 1000
+	} },
+	
+	{ name: 'MeTrigger', 	type: 'MeTrigger', options: {
+		matches: ['!me'], 
+		timeout: 1000
+	} },
+
+	{ name: 'UserTrigger', 	type: 'UserTrigger', options: {
+		timeout: 1000
+	} },
+	
+	{ name: 'TeamSpeakTrigger', 	type: 'TeamSpeakTrigger', options: {
 		timeout: 1000
 	} },
 
 	// Informational commands
 	{ name: 'HelpCmd',   type: 'ChatReplyTrigger', options: {
-		matches: ['!help','!triggers','!cmds','!commands'],
-		responses: ['Please view my profile for a list of publicly commands and other triggers. Not all triggers are allowed in all chats.'],
+		matches: ['!help', '!triggers', '!cmds', '!commands', '!h'],
+		responses: ['List of commands: \r\n!faceit - Shows your faceit stats.\r\n  !queue <time> - Adds you to the queue at your specified time. Defaults to 20:00.\r\n  !unqueue - Removes you from queue\r\n  !list - Shows all currently queued players.\r\n  !lobby - Shows my best solution to create lobbies.'],
 		exact: true, probability: 1, timeout: 1000 } },
 
 	// Automatically accept invites from any user to the specified group chat. I have reports that this may not currently work.
@@ -74,14 +77,5 @@ module.exports = [
 		options: { 
 			autoJoinAfterDisconnect: true
 		} 
-	},
-	
-	//steamrep command
-	{	name: 'SteamIDCheck', 
-		type: 'SteamrepTrigger', 
-		options: { 
-			command: "!steamrep", 
-			delay: 2000, 
-			timeout: 5*1000 } 
 	}
 ];

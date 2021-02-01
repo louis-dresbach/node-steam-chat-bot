@@ -13,7 +13,9 @@
 require('dotenv').config({silent: true});
 
 var when = require("when");
-var ChatBot = require("nscb").ChatBot;
+
+//var ChatBot = require("nscb").ChatBot;
+var ChatBot = require("./lib/chatBot.js").ChatBot;
 
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
@@ -40,10 +42,10 @@ if(process.env.guardCode) {
 	chatBotOptions.guardCode = process.env.guardCode;
 }
 
-var username = process.env.username || "";
-var password = process.env.password || "";
-var fusername = process.env.fusername || "";
-var fpassword = process.env.fpassword || "";
+var username = process.env.steamUsername || "";
+var password = process.env.steamPassword || "";
+var fusername = process.env.FirebaseUsername || "";
+var fpassword = process.env.FirebasePassword || "";
 
 var defaultTriggers = require("./triggers.js");
 
